@@ -1,0 +1,534 @@
+{
+  "version": "course-mapping-v1",
+  "group": "D23 lop04 nhom12",
+  "authority_order": [
+    "group_xlsx_requirements",
+    "report_ND1_ND2",
+    "course_slides_design_basis"
+  ],
+  "pdf_page_numbering": "1-based PDF order",
+  "chapters": [
+    {
+      "chapter": 1,
+      "source": "../../HeCSDL_DPT_slides/Bai 1 - Gioi thieu.pdf",
+      "sha256": "6b532f310ea77e9f37dfc31645dcdf6cac3d8983907488dba21e219aef44d9df",
+      "page_count": 51,
+      "topics": [
+        {
+          "pdf_pages": [
+            14,
+            20
+          ],
+          "concept": "Original media + metadata + features",
+          "code": [
+            "src/nhom12/storage_mysql/repository.py"
+          ],
+          "disposition": "implemented"
+        },
+        {
+          "pdf_pages": [
+            24,
+            29
+          ],
+          "concept": "Offline indexing / online query / semantic gap",
+          "code": [
+            "src/nhom12/building.py",
+            "src/nhom12/querying.py"
+          ],
+          "disposition": "implemented_with_semantic_limits"
+        },
+        {
+          "pdf_pages": [
+            43,
+            51
+          ],
+          "concept": "Efficiency vs effectiveness and precision/recall",
+          "code": [
+            "src/nhom12/evaluation.py",
+            "scripts/validate_stage4.py"
+          ],
+          "disposition": "correctness_latency_measured_relevance_pending"
+        }
+      ]
+    },
+    {
+      "chapter": 2,
+      "source": "../../HeCSDL_DPT_slides/2 - Cac loai du lieu DPT.pdf",
+      "sha256": "c2fbe414d9eb8277d014fd6eafd8db575f7e6b21b4c7338fda349229fb6d64f2",
+      "page_count": 37,
+      "topics": [
+        {
+          "pdf_pages": [
+            3,
+            16
+          ],
+          "concept": "Pixel matrix / RGB HSV / low-level descriptors",
+          "code": [
+            "src/nhom12/features.py",
+            "src/nhom12/preprocess.py"
+          ],
+          "disposition": "implemented"
+        },
+        {
+          "pdf_pages": [
+            17,
+            30
+          ],
+          "concept": "Audio and text representations",
+          "code": [],
+          "disposition": "context_only"
+        },
+        {
+          "pdf_pages": [
+            31,
+            37
+          ],
+          "concept": "Video metadata and spatiotemporal structure",
+          "code": [
+            "src/nhom12/media.py",
+            "src/nhom12/building.py"
+          ],
+          "disposition": "implemented"
+        }
+      ]
+    },
+    {
+      "chapter": 3,
+      "source": "../../HeCSDL_DPT_slides/3- Nen du lieu DPT.pdf",
+      "sha256": "cd5965301c81464f3cdbdab6d256256d58abb3a773d4fbfdb26466359a071dfd",
+      "page_count": 36,
+      "topics": [
+        {
+          "pdf_pages": [
+            3,
+            18
+          ],
+          "concept": "Audio compression",
+          "code": [],
+          "disposition": "context_only"
+        },
+        {
+          "pdf_pages": [
+            19,
+            28
+          ],
+          "concept": "Image size / sampling / JPEG DCT",
+          "code": [
+            "src/nhom12/preprocess.py"
+          ],
+          "disposition": "library_tools_and_design_rationale_not_custom_codec"
+        },
+        {
+          "pdf_pages": [
+            29,
+            31
+          ],
+          "concept": "Video compression and codec motion",
+          "code": [
+            "src/nhom12/media.py"
+          ],
+          "disposition": "decode_original_mp4_no_codec_motion_descriptor"
+        },
+        {
+          "pdf_pages": [
+            32,
+            36
+          ],
+          "concept": "Huffman RLE LZW",
+          "code": [],
+          "disposition": "context_only_no_custom_encoder"
+        }
+      ]
+    },
+    {
+      "chapter": 4,
+      "source": "../../HeCSDL_DPT_slides/4 - Kien truc he CSDL DPT.pdf",
+      "sha256": "7895bd198828397cdef2b392e0fd02c98da07b34302919e8ea53801b5bc4cdca",
+      "page_count": 28,
+      "topics": [
+        {
+          "pdf_pages": [
+            2,
+            8
+          ],
+          "concept": "Centralized/distributed and autonomy/uniform/hybrid principles",
+          "code": [
+            "src/nhom12/storage_mysql/connection.py",
+            "src/nhom12/querying.py"
+          ],
+          "disposition": "centralized_layered_file_plus_metadata"
+        },
+        {
+          "pdf_pages": [
+            9,
+            17
+          ],
+          "concept": "Server requirements / client-server / adaptation",
+          "code": [
+            "src/nhom12/querying.py",
+            "src/nhom12/demo.py"
+          ],
+          "disposition": "application_service_implemented_browser_ui_pending"
+        },
+        {
+          "pdf_pages": [
+            18,
+            28
+          ],
+          "concept": "P2P distributed systems and streaming",
+          "code": [],
+          "disposition": "context_and_stage5_media_delivery"
+        }
+      ]
+    },
+    {
+      "chapter": 5,
+      "source": "../../HeCSDL_DPT_slides/5 - Mo hinh hoa du lieu DPT.pdf",
+      "sha256": "dd569b2288352cea1d77d47cea46ba14b226a0a013e94d30b03843903d14a83e",
+      "page_count": 23,
+      "topics": [
+        {
+          "pdf_pages": [
+            2,
+            4
+          ],
+          "concept": "Relational model and constraints",
+          "code": [
+            "src/nhom12/storage_mysql/schema.sql"
+          ],
+          "disposition": "implemented"
+        },
+        {
+          "pdf_pages": [
+            5,
+            17
+          ],
+          "concept": "Objects classes domains attributes",
+          "code": [
+            "src/nhom12/core.py",
+            "src/nhom12/querying.py"
+          ],
+          "disposition": "conceptual_mapping_not_oodb"
+        },
+        {
+          "pdf_pages": [
+            18,
+            23
+          ],
+          "concept": "Methods and I/O types / ODL OQL",
+          "code": [
+            "src/nhom12/ports.py",
+            "src/nhom12/querying.py"
+          ],
+          "disposition": "typed_interfaces_no_odl_oql_engine"
+        }
+      ]
+    },
+    {
+      "chapter": 6,
+      "source": "../../HeCSDL_DPT_slides/6 - Sieu du lieu va CSDL DPT.pdf",
+      "sha256": "00bf412f5a7a957acd9af3c07da7341a7114f11e25be2e031f78ffd4245c26f2",
+      "page_count": 34,
+      "topics": [
+        {
+          "pdf_pages": [
+            2,
+            8
+          ],
+          "concept": "Perceptual and semantic gaps",
+          "code": [
+            "src/nhom12/features.py"
+          ],
+          "disposition": "explicit_limitations"
+        },
+        {
+          "pdf_pages": [
+            9,
+            24
+          ],
+          "concept": "Content-dependent and independent metadata",
+          "code": [
+            "src/nhom12/storage_mysql/schema.sql",
+            "src/nhom12/building.py"
+          ],
+          "disposition": "implemented_quality_review_pending"
+        },
+        {
+          "pdf_pages": [
+            25,
+            29
+          ],
+          "concept": "Description identification interpretation",
+          "code": [],
+          "disposition": "semantic_scope_explanation"
+        },
+        {
+          "pdf_pages": [
+            30,
+            34
+          ],
+          "concept": "Metadata managers and open architecture",
+          "code": [
+            "src/nhom12/storage_mysql/revisions.py",
+            "src/nhom12/file_snapshot.py",
+            "src/nhom12/querying.py"
+          ],
+          "disposition": "implemented_open_file_metadata_separation"
+        }
+      ]
+    },
+    {
+      "chapter": 7,
+      "source": "../../HeCSDL_DPT_slides/7 - Cau truc du lieu da chieu.pdf",
+      "sha256": "51c556e220444090d24b1397ad4ba8fb9aad39c6732cd5e3d9a9f8c4902981fa",
+      "page_count": 62,
+      "topics": [
+        {
+          "pdf_pages": [
+            4,
+            21
+          ],
+          "concept": "Exact/range/NN/kNN and kd-tree",
+          "code": [
+            "src/nhom12/retrieval.py"
+          ],
+          "disposition": "exact_exhaustive_scan_baseline_no_kd_tree"
+        },
+        {
+          "pdf_pages": [
+            22,
+            48
+          ],
+          "concept": "Quadtree MX PR",
+          "code": [],
+          "disposition": "alternative_reviewed_not_implemented"
+        },
+        {
+          "pdf_pages": [
+            49,
+            62
+          ],
+          "concept": "R-tree MBR",
+          "code": [],
+          "disposition": "alternative_reviewed_not_implemented"
+        }
+      ]
+    },
+    {
+      "chapter": 8,
+      "source": "../../HeCSDL_DPT_slides/8 - Truy van khong gian vecto va phan cum.pdf",
+      "sha256": "4c7a0abb82c85a8b244806c648ea0636b10ee914cc81d17c72e6b36305163e96",
+      "page_count": 27,
+      "topics": [
+        {
+          "pdf_pages": [
+            2,
+            9
+          ],
+          "concept": "Vector dot product cosine and ranking",
+          "code": [
+            "src/nhom12/search.py",
+            "src/nhom12/retrieval.py"
+          ],
+          "disposition": "principle_transferred_from_text_vectors_to_image_features"
+        },
+        {
+          "pdf_pages": [
+            10,
+            13
+          ],
+          "concept": "Relevance feedback",
+          "code": [],
+          "disposition": "future_extension_not_implemented"
+        },
+        {
+          "pdf_pages": [
+            14,
+            27
+          ],
+          "concept": "Distance and pairwise/random/k-means clustering",
+          "code": [],
+          "disposition": "reviewed_no_class_pruning_no_clustering_claim"
+        }
+      ]
+    },
+    {
+      "chapter": 9,
+      "source": "../../HeCSDL_DPT_slides/9 - Du lieu van ban va Boolean.pdf",
+      "sha256": "76bab741e3941b7570de456e64006b2b5051d62902a5042d84a7087ea50145dc",
+      "page_count": 18,
+      "topics": [
+        {
+          "pdf_pages": [
+            2,
+            5
+          ],
+          "concept": "Keyword extraction and DBMS vs IR",
+          "code": [
+            "src/nhom12/storage_mysql/repository.py",
+            "src/nhom12/search.py"
+          ],
+          "disposition": "distinguish_metadata_queries_from_similarity_no_text_ir"
+        },
+        {
+          "pdf_pages": [
+            6,
+            13
+          ],
+          "concept": "Flat/signature/inverted files and Boolean",
+          "code": [],
+          "disposition": "extension_if_annotations_added"
+        },
+        {
+          "pdf_pages": [
+            14,
+            18
+          ],
+          "concept": "TF-IDF and weighted Boolean",
+          "code": [],
+          "disposition": "context_only_not_clip"
+        }
+      ]
+    },
+    {
+      "chapter": 10,
+      "source": "../../HeCSDL_DPT_slides/10 - Chi so hoa va truy van du lieu am thanh.pdf",
+      "sha256": "318e12974ba60b8706d73734473a1df511c1d0d51073ca5cc1bf11fdcf873c73",
+      "page_count": 29,
+      "topics": [
+        {
+          "pdf_pages": [
+            2,
+            16
+          ],
+          "concept": "Audio waveform energy ZCR silence spectrum pitch",
+          "code": [],
+          "disposition": "outside_visual_descriptor_contract"
+        },
+        {
+          "pdf_pages": [
+            17,
+            22
+          ],
+          "concept": "Audio classification vector segmentation",
+          "code": [],
+          "disposition": "extension_not_implemented"
+        },
+        {
+          "pdf_pages": [
+            23,
+            29
+          ],
+          "concept": "ASR speaker music retrieval",
+          "code": [],
+          "disposition": "extension_not_implemented"
+        }
+      ]
+    },
+    {
+      "chapter": 11,
+      "source": "../../HeCSDL_DPT_slides/11 - Chi so hoa va truy van du lieu anh.pdf",
+      "sha256": "9aed364695b4aa0a6e0150c1303fd9f2fd28ce183cac96806564866b8ae0a85a",
+      "page_count": 27,
+      "topics": [
+        {
+          "pdf_pages": [
+            3,
+            8
+          ],
+          "concept": "Metadata text and content-based image retrieval",
+          "code": [
+            "src/nhom12/querying.py"
+          ],
+          "disposition": "image_query_not_keyword_filter"
+        },
+        {
+          "pdf_pages": [
+            9,
+            18
+          ],
+          "concept": "Color histogram distances and spatial limits",
+          "code": [
+            "src/nhom12/features.py",
+            "src/nhom12/query_evidence.py"
+          ],
+          "disposition": "hsv_and_report_specific_distance"
+        },
+        {
+          "pdf_pages": [
+            19,
+            25
+          ],
+          "concept": "Shape grid moments",
+          "code": [],
+          "disposition": "alternative_not_implemented"
+        },
+        {
+          "pdf_pages": [
+            26,
+            27
+          ],
+          "concept": "Texture/layout and compressed-domain retrieval",
+          "code": [
+            "src/nhom12/features.py"
+          ],
+          "disposition": "lbp_report_choice_no_dct_fft_wavelet_descriptor"
+        }
+      ]
+    },
+    {
+      "chapter": 12,
+      "source": "../../HeCSDL_DPT_slides/12 - Chi so hoa va truy van du lieu video.pdf",
+      "sha256": "5b9c25a4b6594ea66b44c039f8ef02767384c172bc7dd938ca424b35ca72be5f",
+      "page_count": 14,
+      "topics": [
+        {
+          "pdf_pages": [
+            3,
+            5
+          ],
+          "concept": "Metadata/audio/text/content and shots",
+          "code": [
+            "src/nhom12/building.py",
+            "src/nhom12/querying.py"
+          ],
+          "disposition": "visual_retrieval_scene_review_pending"
+        },
+        {
+          "pdf_pages": [
+            6,
+            9
+          ],
+          "concept": "Shot detection thresholds and optical flow",
+          "code": [
+            "src/nhom12/features.py"
+          ],
+          "disposition": "flow_descriptor_not_automatic_shot_detection"
+        },
+        {
+          "pdf_pages": [
+            10,
+            12
+          ],
+          "concept": "Representative frames and image-to-video comparison",
+          "code": [
+            "src/nhom12/building.py",
+            "src/nhom12/retrieval.py"
+          ],
+          "disposition": "report_fixed_16_frames_and_actual_pts"
+        },
+        {
+          "pdf_pages": [
+            13,
+            14
+          ],
+          "concept": "Motion objects and hybrid retrieval",
+          "code": [
+            "src/nhom12/features.py"
+          ],
+          "disposition": "motion24_persisted_image_query_has_no_motion"
+        }
+      ]
+    }
+  ]
+}

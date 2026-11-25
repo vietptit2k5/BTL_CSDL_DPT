@@ -1,0 +1,10 @@
+{
+  "version": "nd12-v1",
+  "source": "Bao cao D23 nhom 12, muc 2.7.1, Bang 2.8",
+  "classes": {"Sea":"SEA","Waterfall":"WAT","Forest":"FOR","Mountain":"MOU","River-Lake":"RIV","Flower":"FLO"},
+  "sampling": {"k":16,"margin":0.05,"decode_short_side":360,"motion_pairs":8,"motion_dt":0.25,"motion_short_side":180},
+  "preprocess": {"percentile":98,"border_threshold":24,"mean_threshold":12,"min_border_fraction":0.01,"min_keep_area":0.4,"feature_short_side":256},
+  "features": {"hsv_dim":128,"lbp_dim":10,"clip_dim":512,"motion_dim":24,"clip_checkpoint":"openai/clip-vit-base-patch32"},
+  "dataset": {"minimum_videos":500,"duration_rounded_min":4.0,"duration_rounded_max":30.0},
+  "flow_normalization": "L1_each_of_3_blocks_without_global_division"
+}

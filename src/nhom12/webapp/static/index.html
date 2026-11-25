@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="vi">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Tìm năm video thiên nhiên tương đồng từ một bức ảnh. D23 lớp 04, nhóm 12.">
+<title>Tìm cảnh · D23 Nhóm 12</title><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/app.css"><script src="/app.js" defer></script></head>
+<body>
+<header class="topbar"><div class="header-inner"><a class="brand" href="/" aria-label="Tìm cảnh, trang chính"><span class="brand-icon">◈</span><span>Tìm cảnh<small>VIDEO THIÊN NHIÊN</small></span></a><div class="header-actions"><span class="local-badge"><i></i> MySQL · Cục bộ</span><button class="button subtle" id="reset" type="button">↻ <span>Phiên mới</span></button></div></div></header>
+<main class="shell">
+  <div class="page-heading"><div><p class="eyebrow">KHÁM PHÁ BẰNG HÌNH ẢNH</p><h1>Một bức ảnh. Năm góc nhìn.</h1><p class="intro">Tìm những thước phim có nội dung gần với bức ảnh của bạn.</p></div><span class="project-tag">D23 · Lớp 04 · Nhóm 12</span></div>
+  <div class="workspace">
+    <aside class="query-column">
+      <section class="panel query-panel" aria-labelledby="query-title"><div class="section-title"><span class="step">01</span><h2 id="query-title">Ảnh của bạn</h2></div>
+        <div id="dropzone" class="dropzone"><input id="image-file" type="file" accept="image/*" class="file-input" aria-label="Chọn ảnh để tìm video">
+          <div id="upload-prompt"><svg class="upload-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="7" y="9" width="34" height="30" rx="6" stroke="currentColor" stroke-width="1.5"/><circle cx="17" cy="19" r="3" stroke="currentColor" stroke-width="1.5"/><path d="m9 34 10-9 7 6 6-6 8 9" stroke="currentColor" stroke-width="1.5"/></svg><p>Kéo ảnh vào đây</p><span>hoặc chọn một ảnh từ máy</span></div>
+          <img id="preview" alt="Ảnh đã chọn" hidden>
+          <label for="image-file" class="button choose" id="choose-label">Chọn ảnh</label>
+        </div>
+        <div class="file-info"><span id="file-name">JPG, PNG, WebP và các định dạng ảnh phổ biến</span><small id="file-size">Tối đa 64 MB</small></div>
+        <button id="search" class="button primary search-button" disabled type="button"><span class="search-icon">⌕</span> Tìm 5 video <span aria-hidden="true">↗</span></button>
+        <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+        <div id="progress" class="progress-box" hidden><div class="progress-heading"><span class="spinner"></span><strong id="progress-title">Đang tìm kiếm</strong><span id="elapsed">0s</span></div><progress aria-label="Đang xử lý ảnh"></progress><p id="progress-description">Lần đầu cần nạp mô hình và kiểm tra kho video. Các lượt sau sẽ dùng lại phiên.</p></div>
+      </section>
+      <section class="collection-card"><div class="collection-symbol">⌁</div><div><h3>Thiên nhiên, ở nhiều góc nhìn</h3><p>Biển · Thác · Rừng · Núi · Sông hồ · Hoa</p><div class="collection-count" id="collection-count">Kho video sẽ được nạp ở lần tìm đầu tiên</div></div></section>
+      <div class="session-note"><span class="small-dot" id="session-dot"></span><span id="session-note">Mô hình được giữ lại trong cùng phiên tìm kiếm.</span></div>
+    </aside>
+    <section class="result-column" aria-labelledby="result-title">
+      <div class="results-toolbar"><div><p class="eyebrow">KẾT QUẢ TƯƠNG ĐỒNG</p><h2 id="result-title">Cùng tìm một khung cảnh</h2></div><a id="trace-download" class="button subtle" hidden download>Tải trace ↓</a></div>
+      <div id="empty" class="empty-state"><svg class="landscape" viewBox="0 0 460 245" fill="none" aria-hidden="true"><circle cx="329" cy="61" r="24" fill="#dfba7a"/><path d="m64 171 93-104 98 104" fill="#d6e2d7"/><path d="m159 170 96-78 119 78" fill="#b5ccb9"/><path d="m84 171 99-48 86 48" fill="#809f8c"/><path d="M31 172h397" stroke="#496c5b" stroke-width="1.6"/><path d="M107 190h235M145 203h177M196 216h72" stroke="#c3d3c8" stroke-width="2" stroke-linecap="round"/><path d="M381 171v-51m-15 18 15-22 15 22m-31 13 16-22 17 22" stroke="#496c5b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M51 171v-33m-10 9 10-16 11 16m-24 11 13-18 13 18" stroke="#809f8c" stroke-width="2" stroke-linecap="round"/></svg><h3>Bắt đầu từ điều khiến bạn chú ý</h3><p>Chọn một bức ảnh. Chúng tôi sẽ tìm 5 video gần nhất<br>và chỉ ra khung hình tạo nên sự tương đồng.</p><div class="empty-tags"><span>5 video riêng biệt</span><span>Khung khớp & thời điểm</span><span>Điểm số có thể đối chiếu</span></div></div>
+      <div id="result-summary" class="result-summary" hidden></div><div id="results" class="results-grid" aria-live="polite"></div>
+      <details id="intermediate" class="panel intermediate" hidden><summary><span>Ảnh xử lý & dấu vết tìm kiếm</span><small>Xem cách hình ảnh được so sánh</small></summary><div class="intermediate-body"><div id="processed-images" class="processed-images"></div><h3>Phân bố màu và kết cấu</h3><img id="histogram" class="histogram" alt="Histogram HSV 128 ô và LBP 10 ô"><div id="technical-summary" class="technical-summary"></div><div class="evidence-links"><a id="vectors-download" download>Tải vector NPZ ↓</a><a id="evidence-trace" download>Tải phép tính JSON ↓</a></div></div></details>
+    </section>
+  </div>
+  <footer><span>D23 Nhóm 12 · Hệ cơ sở dữ liệu đa phương tiện</span><span>Điểm tương đồng là thứ tự xếp hạng, không phải xác suất đúng.</span></footer>
+</main></body></html>

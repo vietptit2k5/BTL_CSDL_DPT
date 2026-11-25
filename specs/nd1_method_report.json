@@ -1,0 +1,20 @@
+{
+  "source": "[D23-lớp 04] - Nhóm 12.pdf, trang 13-14, Bảng 1.5; trang 27, 33-35 cho ND2",
+  "status": "report_transcription_requires_original_baseline_verification",
+  "method": {
+    "keyframes": 16,
+    "prepared_short_side": 256,
+    "color": "OpenCV HSV; h=2H; dark V<50; white S<40 V>=190; gray S<40 50<=V<190; other pixels red_orange [0,40) or [345,360), yellow [40,70), green [70,165), blue [165,255), purple_pink [255,345); mean per-frame fractions, first maximum in declared order",
+    "color_tie_order": ["blue", "green", "yellow", "red_orange", "purple_pink", "white", "gray", "dark"],
+    "texture": "OpenCV RGB2GRAY; Canny 100,200; fraction of nonzero edge pixels averaged across 16 frames",
+    "motion": "8 pairs; starts sample_times(duration-0.25,8,0.05); ends starts+0.25; nearest actual PTS; decode RGB short360; apply stored video crop; resize short256; OpenCV RGB2GRAY; mean absolute grayscale differences averaged over pairs",
+    "threshold_boundary": "low: x<lower; medium: lower<=x<=upper; high: x>upper"
+  },
+  "diagnostic_rounded_thresholds_only": {"edge_low": 0.067, "edge_high": 0.133, "motion_low": 3.9, "motion_high": 9.6},
+  "mapping": {
+    "D1": "HSV supports color; 8 ND1 groups kept without merging",
+    "D2": "LBP supports texture, evaluated by the separate ND1 Canny proxy",
+    "D4": "CLIP supports subject/scene class; D3 layout not separately measured",
+    "D5": "Flow supports motion; ND1 grayscale-difference proxy is related but not identical"
+  }
+}

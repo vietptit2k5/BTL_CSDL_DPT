@@ -1,0 +1,24 @@
+{
+  "dataset_root": "..",
+  "artifacts": "var",
+  "model_path": "models/clip-vit-base-patch32",
+  "model_revision": null,
+  "device": "cuda",
+  "local_files_only": true,
+  "database": {
+    "backend": "mysql",
+    "connection_file": ".mysql.local.json",
+    "tracking_mode": "procedure"
+  },
+  "search": {
+    "top_k": 5,
+    "aggregation": "best_joint_frame",
+    "weights": {
+      "clip": 0.95,
+      "hsv": 0.05,
+      "lbp": 0.0
+    },
+    "status": "provisional_requires_evaluation",
+    "normalization": "bounded_distances"
+  }
+}

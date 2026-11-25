@@ -1,0 +1,14 @@
+{
+  "_ghi_chu": "Khai báo TRƯỚC khi chạy w03. Sau khi đã chạy và khoá trọng số thì không sửa file này nữa.",
+  "_lich_su": "2026-11-24: tập validation đổi từ 120 truy vấn (20/lớp) sang toàn bộ 561 video (1 truy vấn/video). Lý do: với 120 truy vấn, ngưỡng R@1 >= 0,99 chỉ cho trượt 1 truy vấn nên quyết định phụ thuộc vào một ảnh (chạy thử: 'chỉ CLIP' đạt ràng buộc nhờ trượt đúng 1 ảnh). Mục tiêu, ngưỡng và quy tắc chọn giữ nguyên.",
+  "tap_validation": "Toàn bộ 561 video, mỗi video 1 khung (số 7) đã biến đổi giống ND2",
+  "muc_tieu_chinh": "P@5 trung bình theo lớp (macro), bỏ video nguồn, đúng = cùng lớp",
+  "rang_buoc": {"do_do": "R@1 (giữ video nguồn, bỏ khung gốc)", "nguong": 0.99},
+  "khi_khong_dat_rang_buoc": "chọn cấu hình có R@1 cao nhất; hoà thì lấy P@5 cao hơn",
+  "luoi_w_hsv": [0.0, 0.05, 0.1, 0.15, 0.2, 0.3],
+  "w_lbp_mac_dinh": 0.0,
+  "ly_do_w_lbp_0": "Khảo sát B2: chỉ LBP cho R@1 rất thấp với ảnh bị biến đổi; khớp nhận định mục 2.4.4 và Bảng 2.10 của báo cáo ND2",
+  "kiem_tra_lbp": [0.05, 0.1],
+  "quy_tac_chon": "Trong các cấu hình đạt ràng buộc, lấy P@5 cao nhất (P*); chọn cấu hình có w_hsv NHỎ NHẤT mà P@5 >= P* - SE (quy tắc 1-SE)",
+  "quy_tac_them_lbp": "Chỉ thêm LBP nếu vẫn đạt ràng buộc VÀ P@5 tăng hơn 1 SE so với cấu hình đã chọn"
+}

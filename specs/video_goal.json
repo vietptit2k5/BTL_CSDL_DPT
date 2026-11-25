@@ -1,0 +1,19 @@
+{
+  "version": "nd3_goal_v1",
+  "objective": "macro mean of per-query (class@5 + D1@5 + D2@5 + D5@5)/4",
+  "metrics": ["class", "d1", "d2", "d5"],
+  "relevance": "same original ND1 categorical label; class uses ND1 six scene classes; D1 uses original metadata dominant_group (five groups obtained by mapping the argmax of eight pixel shares), with eight-color detail retained",
+  "constraint": "class P@5 >= maximum development class P@5 across the declared grid minus SE of that reference configuration",
+  "weight_grid": [0.0, 0.05, 0.1, 0.15, 0.2],
+  "clip_minimum": 0.4,
+  "selection": "within constrained configs, objective >= best constrained objective minus its SE; choose fewest nonzero weights, then largest CLIP, then lexicographically smallest HSV/LBP/motion",
+  "seed": 2026,
+  "split": "half groups within each class; development for selection, test only for final metrics; gallery all indexed videos excluding query itself",
+  "se": "class macro with within-class cluster-sum SE; objective formed per query to retain covariance",
+  "groups": "optional video_id,group CSV; default each video is a group, which does not certify absence of near duplicates",
+  "ablation": "four single descriptors, chosen weights, four leave-one-out; renormalize remaining weights without retuning",
+  "random_baseline": "exact expected same-label fraction in whole gallery excluding query, macro over the actual query split",
+  "flow_score": "1 - symmetric_chi_square/3; three original L1 blocks preserved",
+  "no_positive_weight_requirement": true,
+  "test_policy": "one sealed test execution after weight lock; no tuning based on test; no claim that 1-SE is a significance test"
+}

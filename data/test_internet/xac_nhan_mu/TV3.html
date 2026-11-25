@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="vi"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gán nhãn độc lập — TV3</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f6f3;color:#19382b;font:16px/1.5 system-ui,sans-serif}
+main{max-width:1120px;margin:auto;padding:24px}header{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+h1{font-size:26px;margin:0}small{color:#526b5c}.layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:20px;margin-top:18px}
+.photo,.form{background:white;border:1px solid #d7e1d8;border-radius:14px;padding:16px}.photo img{display:block;width:100%;height:58vh;object-fit:contain;background:#eef2ef}
+.nav{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:14px}button,.import{font:inherit;padding:9px 13px;border:1px solid #b6cbb9;border-radius:8px;background:white;color:#19382b;cursor:pointer}
+button:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #d89c2b;outline-offset:2px}button.active,.primary{background:#245b42;color:white}.classes{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+label{display:block;margin-top:16px}textarea,select{width:100%;padding:8px;font:inherit;border:1px solid #b6cbb9;border-radius:6px}textarea{height:100px}progress{width:100%;accent-color:#245b42}
+.hint{font-size:14px;color:#526b5c}.error{color:#a52822}#status{min-height:44px}details{margin-top:18px}summary{cursor:pointer}table{border-collapse:collapse;width:100%;font-size:14px}td{border-bottom:1px solid #ddd;padding:8px}.tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.photo img{height:45vh}main{padding:12px}}
+</style>
+<main><header><div><small>D23 NHÓM 12 · GÁN NHÃN ĐỘC LẬP</small><h1>Phiếu TV3</h1></div><a href="HUONG_DAN.md">Hướng dẫn</a></header>
+<p>Gán theo chủ thể chính của ảnh. Làm độc lập, giữ nguyên mã X01…X60 và chỉ nộp phiếu của mình.</p>
+<div id="progress-text"></div><progress id="progress" max="60" value="0"></progress>
+<div class="layout"><section class="photo"><a id="full" target="_blank" rel="noopener"><img id="image" alt="Ảnh cần gán nhãn"></a>
+<div class="nav"><button id="prev">← Trước</button><strong id="position"></strong><button id="next">Tiếp →</button></div><p class="hint">Bấm ảnh để xem đầy đủ. Có thể bỏ qua và quay lại; phiếu nộp cần điền đủ.</p></section>
+<section class="form"><h2 id="name"></h2><div class="classes" id="classes"></div>
+<label>Mức chắc chắn<select id="certainty"><option value="">Chọn mức độ…</option><option value="chac">Chắc chắn</option><option value="phan_van">Phân vân</option></select></label>
+<label>Ghi chú<textarea id="notes" placeholder="Cần lý do nếu phân vân hoặc không rõ lớp"></textarea></label>
+<p class="hint">Ghi chú không tham gia điểm tìm kiếm.</p><p id="status" role="status" aria-live="polite"></p>
+<button id="unfinished">Tới ảnh chưa hoàn tất</button></section></div>
+<div class="tools"><button id="download" class="primary">Tải phiếu để nộp</button><button id="draft">Tải bản nháp</button><label class="import" style="margin:0">Nhập lại phiếu CSV<input id="import" type="file" accept=".csv,text/csv" hidden></label></div>
+<p class="hint">Tiến trình tự lưu trên trình duyệt này nếu được hỗ trợ. Tải bản nháp thường xuyên; không dùng cửa sổ ẩn danh nếu cần giữ tiến trình sau khi đóng. Khi nộp, chép CSV đã tải vào đúng tên phieu_TV3.csv trong thư mục này rồi commit.</p>
+<details><summary>Quy tắc phân lớp theo ND1</summary><table>
+<tr><td>SEA — Biển</td><td>Mặt biển, sóng, bờ biển, bãi cát giáp biển.</td></tr><tr><td>WAT — Thác</td><td>Dòng nước đổ từ trên cao, bọt hoặc sương thác.</td></tr>
+<tr><td>FOR — Rừng</td><td>Tán lá, thân cây, đường mòn trong rừng; rừng là trọng tâm.</td></tr><tr><td>MOU — Núi</td><td>Hình dạng đỉnh/dãy/sườn núi hoặc thung lũng là chủ thể.</td></tr>
+<tr><td>RIV — Sông/Hồ</td><td>Mặt nước tương đối phẳng có bờ bao quanh, không có sóng biển lớn hay thác.</td></tr><tr><td>FLO — Hoa</td><td>Bông hoa, bụi hoa hoặc cánh đồng hoa.</td></tr>
+<tr><td>KHONG_RO</td><td>Không xác định được một lớp; ghi rõ lý do.</td></tr></table>
+<p>Hồ có núi phía sau: RIV khi mặt nước là chủ thể, MOU khi núi là trọng tâm. Thác giữa rừng: WAT khi dòng nước đổ là chủ thể.</p></details>
+<p class="hint">Ghi công và giấy phép ảnh: <a href="credits_TV3.csv">credits_TV3.csv</a>. Trang không có nhãn đề xuất hay điểm tìm kiếm.</p>
+</main><script>
+'use strict';
+const kit={"rater": "TV3", "ids": ["X01.jpg", "X02.jpg", "X03.jpg", "X04.jpg", "X05.jpg", "X06.jpg", "X07.jpg", "X08.jpg", "X09.jpg", "X10.jpg", "X11.jpg", "X12.jpg", "X13.jpg", "X14.jpg", "X15.jpg", "X16.jpg", "X17.jpg", "X18.jpg", "X19.jpg", "X20.jpg", "X21.jpg", "X22.jpg", "X23.jpg", "X24.jpg", "X25.jpg", "X26.jpg", "X27.jpg", "X28.jpg", "X29.jpg", "X30.jpg", "X31.jpg", "X32.jpg", "X33.jpg", "X34.jpg", "X35.jpg", "X36.jpg", "X37.jpg", "X38.jpg", "X39.jpg", "X40.jpg", "X41.jpg", "X42.jpg", "X43.jpg", "X44.jpg", "X45.jpg", "X46.jpg", "X47.jpg", "X48.jpg", "X49.jpg", "X50.jpg", "X51.jpg", "X52.jpg", "X53.jpg", "X54.jpg", "X55.jpg", "X56.jpg", "X57.jpg", "X58.jpg", "X59.jpg", "X60.jpg"], "snapshot": "c0b694851f2ac513ff0d2556c585ab8bfa92a65ebe7c68820299702bd9028570"};
+const $=id=>document.getElementById(id),fields=['anh','lop','muc_do','ghi_chu'];
+const choices={SEA:'Biển',WAT:'Thác',FOR:'Rừng',MOU:'Núi',RIV:'Sông/Hồ',FLO:'Hoa',KHONG_RO:'Không rõ'};
+const storageKey='nh12-blind-'+kit.rater+'-'+kit.snapshot;
+let rows=kit.ids.map(anh=>({anh,lop:'',muc_do:'',ghi_chu:''})),index=0;
+function validateRows(data,complete=false){
+ if(data.length!==kit.ids.length||new Set(data.map(r=>r.anh)).size!==kit.ids.length||data.some(r=>!kit.ids.includes(r.anh)))throw Error('Mã ảnh thiếu, thừa hoặc bị trùng.');
+ for(const r of data){if(fields.some(k=>typeof r[k]!=='string'))throw Error('CSV không đủ cột.');if(r.lop&&!Object.hasOwn(choices,r.lop))throw Error(r.anh+': sai mã lớp.');if(r.muc_do&&!['chac','phan_van'].includes(r.muc_do))throw Error(r.anh+': sai mức độ.');if(complete&&!done(r))throw Error(r.anh+': cần lớp, mức chắc chắn và ghi chú nếu phân vân/không rõ.');}
+}
+function done(r){return Object.hasOwn(choices,r.lop)&&['chac','phan_van'].includes(r.muc_do)&&(!(r.lop==='KHONG_RO'||r.muc_do==='phan_van')||r.ghi_chu.trim());}
+function message(text,error=false){$('status').textContent=text;$('status').className=error?'error':'hint';}
+try{const saved=localStorage.getItem(storageKey);if(saved){let d=JSON.parse(saved);validateRows(d);rows=kit.ids.map(id=>d.find(r=>r.anh===id));}}catch{message('Không đọc được bản lưu trình duyệt. Có thể nhập bản nháp CSV.',true);}
+function persist(){try{localStorage.setItem(storageKey,JSON.stringify(rows));message('Đã lưu trên trình duyệt.');}catch{message('Trình duyệt không lưu tiến trình. Hãy tải bản nháp CSV.',true);}progress();}
+function progress(){const n=rows.filter(done).length;$('progress').value=n;$('progress-text').textContent=`Đã hoàn tất ${n}/${rows.length} ảnh`;}
+function paint(){const r=rows[index],src='anh_'+kit.rater+'/'+r.anh;$('image').src=src;$('image').alt=r.anh;$('full').href=src;$('name').textContent=r.anh;$('position').textContent=`${index+1} / ${rows.length}`;$('certainty').value=r.muc_do;$('notes').value=r.ghi_chu;$('prev').disabled=index===0;$('next').disabled=index===rows.length-1;document.querySelectorAll('[data-label]').forEach(b=>{b.classList.toggle('active',b.dataset.label===r.lop);b.setAttribute('aria-pressed',String(b.dataset.label===r.lop));});progress();}
+for(const [code,title] of Object.entries(choices)){const b=document.createElement('button');b.type='button';b.dataset.label=code;b.textContent=code+' · '+title;b.onclick=()=>{rows[index].lop=code;persist();paint();};$('classes').append(b);}
+$('certainty').onchange=()=>{rows[index].muc_do=$('certainty').value;persist();};$('notes').oninput=()=>{rows[index].ghi_chu=$('notes').value;persist();};
+$('prev').onclick=()=>{if(index>0){index--;paint();}};$('next').onclick=()=>{if(index<rows.length-1){index++;paint();}};
+$('unfinished').onclick=()=>{const i=rows.findIndex(r=>!done(r));if(i<0){message('Đã đủ 60 ảnh. Có thể tải phiếu để nộp.');return;}index=i;paint();};
+function download(complete){try{validateRows(rows,complete);}catch(e){message(e.message,true);return;}const quote=v=>'"'+v.replaceAll('"','""')+'"';const csv='\ufeff'+[fields.join(','),...rows.map(r=>fields.map(k=>quote(r[k])).join(','))].join('\r\n')+'\r\n';const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='phieu_'+kit.rater+(complete?'':'_nhap')+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);message(complete?'Đã xuất phiếu. Chép vào đúng phieu_'+kit.rater+'.csv rồi commit.':'Đã xuất bản nháp.');}
+$('download').onclick=()=>download(true);$('draft').onclick=()=>download(false);
+function parseCSV(text){text=text.replace(/^\ufeff/,'');let table=[],row=[],cell='',quoted=false;for(let i=0;i<text.length;i++){let ch=text[i];if(ch==='"'){if(quoted&&text[i+1]==='"'){cell+='"';i++;}else quoted=!quoted;}else if(ch===','&&!quoted){row.push(cell);cell='';}else if((ch==='\n'||ch==='\r')&&!quoted){if(ch==='\r'&&text[i+1]==='\n')i++;row.push(cell);if(row.some(v=>v!==''))table.push(row);row=[];cell='';}else cell+=ch;}if(quoted)throw Error('CSV thiếu dấu đóng ngoặc kép.');if(cell||row.length){row.push(cell);table.push(row);}if(JSON.stringify(table.shift())!==JSON.stringify(fields))throw Error('Cột phải là anh,lop,muc_do,ghi_chu.');return table.map(r=>{if(r.length!==fields.length)throw Error('CSV có dòng thừa/thiếu cột.');return Object.fromEntries(fields.map((k,i)=>[k,r[i]]));});}
+$('import').onchange=async event=>{const file=event.target.files[0];if(!file)return;try{const incoming=parseCSV(await file.text());validateRows(incoming);if(rows.some(r=>r.lop||r.muc_do||r.ghi_chu)&&!confirm('Thay tiến trình hiện tại bằng CSV này? Hãy giữ bản nháp trước nếu cần.'))return;rows=kit.ids.map(id=>incoming.find(r=>r.anh===id));persist();paint();message('Đã nhập CSV.');}catch(e){message(e.message,true);}finally{event.target.value='';}};
+paint();
+</script></html>

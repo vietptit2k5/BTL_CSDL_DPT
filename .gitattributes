@@ -1,0 +1,14 @@
+* text=auto
+*.py text eol=lf
+*.md text eol=lf
+*.html text eol=lf
+*.js text eol=lf
+*.css text eol=lf
+*.json text eol=lf
+*.csv text eol=lf
+*.ps1 text eol=crlf
+*.jpg binary
+*.png binary
+*.zip binary
+# Index provenance and frozen ND3 runs compare source bytes; preserve them.
+src/** -text
