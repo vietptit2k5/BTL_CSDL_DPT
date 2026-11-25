@@ -2,6 +2,7 @@
 import argparse
 import csv
 import json
+import sys
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[2]
@@ -35,6 +36,8 @@ def validate(path,expected,partial=False):
 
 
 def main():
+    for stream in (sys.stdout,sys.stderr):
+        if hasattr(stream,'reconfigure'):stream.reconfigure(encoding='utf-8')
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--rater',required=True,choices=('TV2','TV3'));ap.add_argument('--csv',type=Path)
     ap.add_argument('--partial',action='store_true',help='Allow completely blank, untouched rows')
